@@ -1,0 +1,32 @@
+# BasicDocumentFlow
+
+main: kit: flow: BasicDocumentFlow:
+{
+  entity: "document",
+  kind: "basic",
+  name: "BasicDocumentFlow",
+  step: [
+    {
+      i: {
+        ref: "document_ref01",
+        srcdatavar: "document_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "document01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-document_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDocumentFlow"
+}

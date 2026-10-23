@@ -1,0 +1,51 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 5
+  metrics: count: path: 8
+  metrics: count: method: 8
+
+  entity: between: {
+    path: "/similarity/{metric}/between/": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: bulk_document: {
+    path: "/high-level": {
+      op: load: method: *GET
+    }
+    path: "/low-level": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: count: {
+    path: "/count": {
+      op: load: method: *GET
+    }
+    path: "/{mbid}/count": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: document: {
+    path: "/{mbid}/high-level": {
+      op: load: method: *GET
+    }
+    path: "/{mbid}/low-level": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: similarity: {
+    path: "/similarity/{metric}/": {
+      rename: param: "metric": *"id"
+      op: load: method: *GET
+    }
+  }
+
+}

@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "between": {
+      "BETWEEN00": {
+        "metric": "METRIC01",
+        "id": "BETWEEN00"
+      },
+      "BETWEEN01": {
+        "metric": "METRIC01",
+        "id": "BETWEEN01"
+      },
+      "BETWEEN02": {
+        "metric": "METRIC01",
+        "id": "BETWEEN02"
+      }
+    }
+  },
+  "new": {
+    "between": {
+      "between_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /similarity/{metric}/between/": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

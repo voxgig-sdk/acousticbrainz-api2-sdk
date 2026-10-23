@@ -1,0 +1,32 @@
+{
+  "existing": {
+    "bulk_document": {
+      "BULK_DOCUMENT00": {
+        "id": "BULK_DOCUMENT00"
+      },
+      "BULK_DOCUMENT01": {
+        "id": "BULK_DOCUMENT01"
+      },
+      "BULK_DOCUMENT02": {
+        "id": "BULK_DOCUMENT02"
+      }
+    }
+  },
+  "new": {
+    "bulk_document": {
+      "bulk_document_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /high-level": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /low-level": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

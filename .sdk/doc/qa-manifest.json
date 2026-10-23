@@ -1,0 +1,20 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Crowd-sourced acoustic analysis of music recordings, keyed by MusicBrainz Recording ID (MBID). Low-level data holds acoustic descriptors (loudness, dynamics, spectral shape, rhythm, tonal information); high-level data holds semantically meaningful features. Bulk endpoints accept at most 25 recordings per request. Rate limited to roughly 10 requests per 10 seconds per IP, reported via X-RateLimit-* response headers.",
+      "MBIDs mapped to count objects",
+      "Normalised MBIDs mapped to offset-keyed documents",
+      "Ordered similarity lists keyed by MBID and offset",
+      "Production server",
+      "The distance vector, keyed by metric",
+      "The high-level document",
+      "The low-level document",
+      "The submission count"
+    ]
+  }
+}

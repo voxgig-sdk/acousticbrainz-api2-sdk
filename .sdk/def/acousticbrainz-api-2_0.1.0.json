@@ -1,0 +1,425 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AcousticBrainz API",
+    "description": "Crowd-sourced acoustic analysis of music recordings, keyed by MusicBrainz Recording ID (MBID). Low-level data holds acoustic descriptors (loudness, dynamics, spectral shape, rhythm, tonal information); high-level data holds semantically meaningful features. Bulk endpoints accept at most 25 recordings per request. Rate limited to roughly 10 requests per 10 seconds per IP, reported via X-RateLimit-* response headers.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://acousticbrainz.readthedocs.io"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://acousticbrainz.org/api/v1",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/high-level": {
+      "get": {
+        "summary": "Get high-level data for many recordings",
+        "description": "Bulk high-level lookup. At most 25 MBIDs per request.",
+        "operationId": "getHighLevelBulk",
+        "parameters": [
+          {
+            "name": "recording_ids",
+            "in": "query",
+            "description": "MBIDs in the form mbid[:offset];mbid[:offset]. Maximum 25.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "map_classes",
+            "in": "query",
+            "description": "Return human-readable class names",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normalised MBIDs mapped to offset-keyed documents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDocuments"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests"
+          }
+        }
+      }
+    },
+    "/low-level": {
+      "get": {
+        "summary": "Get low-level data for many recordings",
+        "description": "Bulk low-level lookup. At most 25 MBIDs per request.",
+        "operationId": "getLowLevelBulk",
+        "parameters": [
+          {
+            "name": "recording_ids",
+            "in": "query",
+            "description": "MBIDs in the form mbid[:offset];mbid[:offset]. Maximum 25.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "features",
+            "in": "query",
+            "description": "Restrict to specific features, in the form feature1;feature2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normalised MBIDs mapped to offset-keyed documents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDocuments"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests"
+          }
+        }
+      }
+    },
+    "/count": {
+      "get": {
+        "summary": "Get submission counts for many recordings",
+        "description": "Bulk submission counts. At most 25 MBIDs per request.",
+        "operationId": "getCountBulk",
+        "parameters": [
+          {
+            "name": "recording_ids",
+            "in": "query",
+            "description": "MBIDs in the form mbid;mbid. Maximum 25.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MBIDs mapped to count objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "count": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "770cc467-8dde-4d22-bc4c-a42f91e7515e": {
+                    "count": 3
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{mbid}/high-level": {
+      "get": {
+        "summary": "Get high-level data for one recording",
+        "description": "High-level data for a single recording, by document offset.",
+        "operationId": "getHighLevel",
+        "parameters": [
+          {
+            "name": "mbid",
+            "in": "path",
+            "description": "MusicBrainz Recording ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "n",
+            "in": "query",
+            "description": "Document offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "map_classes",
+            "in": "query",
+            "description": "Return human-readable class names",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The high-level document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such recording or offset"
+          }
+        }
+      }
+    },
+    "/{mbid}/low-level": {
+      "get": {
+        "summary": "Get low-level data for one recording",
+        "description": "Low-level data for a single recording, by document offset.",
+        "operationId": "getLowLevel",
+        "parameters": [
+          {
+            "name": "mbid",
+            "in": "path",
+            "description": "MusicBrainz Recording ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "n",
+            "in": "query",
+            "description": "Document offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The low-level document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such recording or offset"
+          }
+        }
+      }
+    },
+    "/{mbid}/count": {
+      "get": {
+        "summary": "Get the submission count for one recording",
+        "description": "Total number of submissions held for a recording.",
+        "operationId": "getCount",
+        "parameters": [
+          {
+            "name": "mbid",
+            "in": "path",
+            "description": "MusicBrainz Recording ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The submission count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Count"
+                },
+                "example": {
+                  "mbid": "770cc467-8dde-4d22-bc4c-a42f91e7515e",
+                  "count": 3
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/similarity/{metric}/between/": {
+      "get": {
+        "summary": "Distance between two recordings",
+        "description": "Computes the distance between two recordings under the given metric.",
+        "operationId": "getSimilarityBetween",
+        "parameters": [
+          {
+            "name": "metric",
+            "in": "path",
+            "description": "Similarity metric: mfccs, mfccsw, gfccs, gfccsw, key, bpm, onsetrate, moods, instruments, dortmund, rosamerica or tzanetakis",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "recording_ids",
+            "in": "query",
+            "description": "Two MBIDs in the form mbid[:offset];mbid[:offset]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The distance vector, keyed by metric",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/similarity/{metric}/": {
+      "get": {
+        "summary": "Find similar recordings",
+        "description": "Returns the most similar recordings to the given submissions.",
+        "operationId": "getSimilar",
+        "parameters": [
+          {
+            "name": "metric",
+            "in": "path",
+            "description": "Similarity metric name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "recording_ids",
+            "in": "query",
+            "description": "MBIDs in the form mbid[:offset];mbid[:offset]. Maximum 25.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "n_neighbours",
+            "in": "query",
+            "description": "Number of neighbours to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": 200
+            }
+          },
+          {
+            "name": "threshold",
+            "in": "query",
+            "description": "Maximum distance to return",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          {
+            "name": "remove_dups",
+            "in": "query",
+            "description": "Deduplication mode: samescore or all",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "samescore",
+                "all"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ordered similarity lists keyed by MBID and offset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Document": {
+        "type": "object",
+        "description": "An acoustic analysis document. The feature set is large and open-ended.",
+        "additionalProperties": true
+      },
+      "BulkDocuments": {
+        "type": "object",
+        "description": "Normalised MBIDs mapped to offset-keyed documents, plus an optional mbid_mapping.",
+        "additionalProperties": true
+      },
+      "Count": {
+        "type": "object",
+        "properties": {
+          "mbid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

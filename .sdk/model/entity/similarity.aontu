@@ -1,0 +1,110 @@
+# Entity: similarity
+
+main: kit: entity: similarity: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "similarity"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /similarity/{metric}/"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "metric"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 200
+                k: "query"
+                n: "n_neighbour"
+                or: "n_neighbours"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "recording_id"
+                or: "recording_ids"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "remove_dup"
+                or: "remove_dups"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "threshold"
+                or: "threshold"
+                r: false
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/similarity/{metric}/"
+          q: {
+            exist: [
+              "id"
+              "recording_id"
+            ]
+          }
+          r: {
+            param: {
+              metric: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "similarity"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

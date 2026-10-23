@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "count": {
+      "COUNT00": {
+        "count": 20,
+        "mbid": "s15",
+        "id": "COUNT00"
+      },
+      "COUNT01": {
+        "count": 40,
+        "mbid": "s29",
+        "id": "COUNT01"
+      },
+      "COUNT02": {
+        "count": 60,
+        "mbid": "s3d",
+        "id": "COUNT02"
+      }
+    }
+  },
+  "new": {
+    "count": {
+      "count_ref01": {
+        "count": 80,
+        "mbid": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /{mbid}/count": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /count": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

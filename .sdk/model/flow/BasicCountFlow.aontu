@@ -1,0 +1,28 @@
+# BasicCountFlow
+
+main: kit: flow: BasicCountFlow:
+{
+  entity: "count",
+  kind: "basic",
+  name: "BasicCountFlow",
+  step: [
+    {
+      i: {
+        ref: "count_ref01",
+        srcdatavar: "count_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-count_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCountFlow"
+}

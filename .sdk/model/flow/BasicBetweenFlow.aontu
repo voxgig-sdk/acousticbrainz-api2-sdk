@@ -1,0 +1,32 @@
+# BasicBetweenFlow
+
+main: kit: flow: BasicBetweenFlow:
+{
+  entity: "between",
+  kind: "basic",
+  name: "BasicBetweenFlow",
+  step: [
+    {
+      i: {
+        ref: "between_ref01",
+        srcdatavar: "between_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "between01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-between_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicBetweenFlow"
+}

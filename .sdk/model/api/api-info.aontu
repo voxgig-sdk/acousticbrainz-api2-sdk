@@ -1,0 +1,25 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      contact: {
+        url: "https://acousticbrainz.readthedocs.io"
+      }
+      description: "Crowd-sourced acoustic analysis of music recordings, keyed by MusicBrainz Recording ID (MBID). Low-level data holds acoustic descriptors (loudness, dynamics, spectral shape, rhythm, tonal information); high-level data holds semantically meaningful features. Bulk endpoints accept at most 25 recordings per request. Rate limited to roughly 10 requests per 10 seconds per IP, reported via X-RateLimit-* response headers."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://acousticbrainz.org/api/v1"
+        }
+      ]
+      summary: "Crowd-sourced acoustic analysis of music recordings, keyed by MusicBrainz Recording ID (MBID)."
+      title: "AcousticBrainz API"
+      version: "1.0.0"
+      website: "https://acousticbrainz.org"
+    }
+  }
+}
+

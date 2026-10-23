@@ -1,0 +1,30 @@
+import { inspect } from 'node:util';
+import { AcousticbrainzApi2SDK } from './AcousticbrainzApi2SDK';
+import { Utility } from './utility/Utility';
+import type { Context } from './types';
+declare class AcousticbrainzApi2EntityBase<D = any> {
+    name: string;
+    name_: string;
+    Name: string;
+    _client: AcousticbrainzApi2SDK;
+    _utility: Utility;
+    _entopts: any;
+    _data: Partial<D>;
+    _match: Partial<D>;
+    _entctx: Context;
+    _deleted: boolean;
+    constructor(client: AcousticbrainzApi2SDK, entopts: any);
+    markDeleted(this: any): void;
+    deleted(this: any): boolean;
+    entopts(): any;
+    client(): AcousticbrainzApi2SDK;
+    data(this: any, data?: Partial<D>): D;
+    match(this: any, match?: Partial<D>): Partial<D>;
+    stream(this: any, action: string, args?: any, callopts?: any): AsyncGenerator<any>;
+    _streamSteps(this: any, ctx: Context): Promise<Error | undefined>;
+    toJSON(): any;
+    toString(): string;
+    [inspect.custom](): string;
+    _unexpected(this: any, ctx: Context, err: any): any;
+}
+export { AcousticbrainzApi2EntityBase };

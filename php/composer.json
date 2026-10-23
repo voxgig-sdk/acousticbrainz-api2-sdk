@@ -1,0 +1,29 @@
+{
+  "name": "voxgig-sdk/acousticbrainz-api2-sdk",
+  "description": "Unofficial generated PHP SDK for the AcousticBrainz public API. Not affiliated with or endorsed by the upstream API provider.",
+  "type": "library",
+  "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "acousticbrainz-api2"],
+  "homepage": "https://github.com/voxgig-sdk/acousticbrainz-api2-sdk",
+  "license": "MIT",
+  "authors": [
+    { "name": "Voxgig", "homepage": "https://voxgig.com" }
+  ],
+  "support": {
+    "issues": "https://github.com/voxgig-sdk/acousticbrainz-api2-sdk/issues",
+    "source": "https://github.com/voxgig-sdk/acousticbrainz-api2-sdk"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.0"
+  },
+  "autoload": {
+    "files": ["acousticbrainzapi2_sdk.php"],
+    "classmap": ["core/", "entity/", "feature/", "types/", "utility/", "config.php", "schema.php", "features.php"]
+  },
+  "autoload-dev": {
+    "classmap": ["test/"]
+  }
+}

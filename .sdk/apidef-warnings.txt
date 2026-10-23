@@ -1,0 +1,24 @@
+{
+  point: "warning"
+  note: "Points GET /high-level and GET /low-level on entity=bulk_document op=load have the same selector (exist: recording_id), so only GET /high-level is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "bulk_document"
+  op: "load"
+  points: [
+    "GET /high-level"
+    "GET /low-level"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /{mbid}/high-level and GET /{mbid}/low-level on entity=document op=load have the same selector (exist: mbid), so only GET /{mbid}/high-level is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "document"
+  op: "load"
+  points: [
+    "GET /{mbid}/high-level"
+    "GET /{mbid}/low-level"
+  ]
+
+}

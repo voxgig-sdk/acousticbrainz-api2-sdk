@@ -1,0 +1,35 @@
+{
+  "existing": {
+    "document": {
+      "DOCUMENT00": {
+        "mbid": "MBID01",
+        "id": "DOCUMENT00"
+      },
+      "DOCUMENT01": {
+        "mbid": "MBID01",
+        "id": "DOCUMENT01"
+      },
+      "DOCUMENT02": {
+        "mbid": "MBID01",
+        "id": "DOCUMENT02"
+      }
+    }
+  },
+  "new": {
+    "document": {
+      "document_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /{mbid}/high-level": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /{mbid}/low-level": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

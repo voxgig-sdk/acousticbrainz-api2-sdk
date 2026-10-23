@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "similarity": {
+      "SIMILARITY00": {
+        "id": "SIMILARITY00"
+      },
+      "SIMILARITY01": {
+        "id": "SIMILARITY01"
+      },
+      "SIMILARITY02": {
+        "id": "SIMILARITY02"
+      }
+    }
+  },
+  "new": {
+    "similarity": {
+      "similarity_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /similarity/{metric}/": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}
